@@ -16,11 +16,17 @@ function App() {
       "text": "Meeting at School",
       "day": "Feb 6th at 1:30pm",
       "reminder": true
+    },
+    {
+      "id": 3,
+      "text": "CV Writting",
+      "day": "Feb 6th at 1:30pm",
+      "reminder": true
     }
   ])
   return (
     <div className='container'>
-      <Header title="Hellow world" />
+      <Header title="Task Tracker" />
       <Tasks tasks={tasks} />
     </div>
   );
