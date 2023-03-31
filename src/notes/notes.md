@@ -6,3 +6,4 @@ Setup
 5. Import react libraries  
     a. `npm i react-icons`  
     b. 
+6. State is passed down and actions get passed up
