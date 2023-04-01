@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Header from "./components/Header"
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 import './App.css';
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([
     {
       "id": 1,
@@ -25,6 +27,12 @@ function App() {
     }
   ])
 
+  //Add task
+  const addTask = ({ text, day, reminder }) => {
+    const id = tasks.length + 1;
+    setTasks([...tasks, { id, text, day, reminder }])
+  }
+
   //Delete a task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -38,7 +46,9 @@ function App() {
 
   return (
     <div className='container'>
-      <Header title="Task Tracker" />
+      <Header title="Task Tracker" onAddToggle={() =>
+        setShowAddTask(!showAddTask)} showAddTask={showAddTask} />
+      {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}
         onDelete={deleteTask} onToggle={toggleReminder} /> : "No tasks to show"}
     </div>
