@@ -15,6 +15,5 @@ Setup
         `objects2 -> updating objects inside state`   
     4. `Array functions -> map(), filter(), reduce()`  
     5. `Async-await, callback vs Promises, Fetch` -> https://www.youtube.com/watch?v=PoRJizFvM7s  
-
-    
-    
+8. Npm serve tool -> `serve -s build -p 5000`
+9. Json server for mock backend 
