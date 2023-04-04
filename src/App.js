@@ -10,19 +10,19 @@ function App() {
       "id": 1,
       "text": "Doctors Appointment",
       "day": "Feb 5th at 2:30pm",
-      "reminder": true
+      "reminder": false
     },
     {
       "id": 2,
       "text": "Meeting at School",
       "day": "Feb 6th at 1:30pm",
-      "reminder": true
+      "reminder": false
     },
     {
       "id": 3,
       "text": "CV Writting",
       "day": "Feb 6th at 1:30pm",
-      "reminder": true
+      "reminder": false
     }
   ])
 
@@ -43,10 +43,13 @@ function App() {
       task.id === id ? { ...task, reminder: !task.reminder } : task
     ))
 
+  const onAddToggle = () => {
+    setShowAddTask(!showAddTask)
+  }
+
   return (
     <div className='container'>
-      <Header title="Task Tracker" onAddToggle={() =>
-        setShowAddTask(!showAddTask)} showAddTask={showAddTask} />
+      <Header title="Task Tracker" onAddToggle={onAddToggle} showAddTask={showAddTask} />
       {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks}
         onDelete={deleteTask} onToggle={toggleReminder} /> : "No tasks to show"}
