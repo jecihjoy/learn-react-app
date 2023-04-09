@@ -61,4 +61,9 @@ We use `Formik` react lirary to help with:
 ## Todos
 1. Use formik library
 2. Use context API for state management
+    1. Use a different component for every context that you create
+    2. When a state changes in the context, all the child components are reloaded
+    3. For state that is always changing, prefer prop drilling
+    4. Group related group of component state in one context
+    5. SWR library has inbuilt state management
 

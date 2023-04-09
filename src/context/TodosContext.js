@@ -8,8 +8,7 @@ export function useTodosContext() {
     return useContext(TodosContext);
 }
 
-const TodosContextProvider = ({children}) => {
-    const [showAddTask, setShowAddTask] = useState(false)
+const TodosContextProvider = ({ children }) => {
     const [tasks, setTasks] = useState([
         {
             "id": 1,
@@ -48,15 +47,15 @@ const TodosContextProvider = ({children}) => {
             task.id === id ? { ...task, reminder: !task.reminder } : task
         ))
 
-    const onAddToggle = () => {
-        setShowAddTask(!showAddTask)
+    const value = {
+        tasks,
+        addTask,
+        deleteTask,
+        toggleReminder
     }
 
     return (
-        <TodosContext.Provider value={{
-            showAddTask, setShowAddTask, tasks, setTasks,
-            addTask, deleteTask, toggleReminder, onAddToggle
-        }}>
+        <TodosContext.Provider value={value}>
             {children}
         </TodosContext.Provider>
     )
