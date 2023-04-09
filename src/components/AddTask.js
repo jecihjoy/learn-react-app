@@ -1,8 +1,10 @@
 import { useState } from "react"
+import { useTodosContext } from "../context/TodosContext"
 
 
 
-const AddTask = ({ onAdd }) => {
+const AddTask = () => {
+    const { addTask } = useTodosContext()
     const [text, setText] = useState('')
     const [day, setDay] = useState('')
     const [reminder, setReminder] = useState(false)
@@ -15,7 +17,7 @@ const AddTask = ({ onAdd }) => {
             return;
         }
 
-        onAdd({ text, day, reminder })
+        addTask({ text, day, reminder })
 
         setText('')
         setDay('')

@@ -1,10 +1,12 @@
 import { FaTimes } from 'react-icons/fa'
+import { useTodosContext } from '../context/TodosContext';
 
-const Task = ({ task, onDelete, onToggle }) => {
+const Task = ({ task }) => {
+  const { deleteTask, toggleReminder} = useTodosContext()
   const {id, text, day} = task;
   return (
-    <div className={`task ${task.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(id)}>
-      <h3>{text} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDelete(id)} /> </h3>
+    <div className={`task ${task.reminder ? 'reminder' : ''}`} onDoubleClick={() => toggleReminder(id)}>
+      <h3>{text} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => deleteTask(id)} /> </h3>
       <p>{day}</p>
     </div>
   )
