@@ -5,6 +5,7 @@ import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import Footer from "./templates/Footer"
 import About from "./templates/About"
+import UseMemoExample from "./learn/UseMemo"
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -63,6 +64,7 @@ function App() {
             </div>
           } />
           <Route path="/about" element={<About />} />
+          <Route path="/learn" element={<UseMemoExample />} />
         </Routes>
         <Footer />
       </div>
