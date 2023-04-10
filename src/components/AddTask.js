@@ -1,56 +1,60 @@
-import { useState } from "react"
 import { useTodosContext } from "../context/TodosContext"
-
-
+import { useFormik } from "formik"
+import * as Yup from 'yup'
 
 const AddTask = () => {
     const { addTask } = useTodosContext()
-    const [text, setText] = useState('')
-    const [day, setDay] = useState('')
-    const [reminder, setReminder] = useState(false)
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        if (!text) {
-            alert('Please add a task');
-            return;
+    const formik = useFormik({
+        initialValues: {
+            text: "",
+            day: "",
+            reminder: false
+        },
+        validationSchema: Yup.object({
+            text: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+            day: Yup.string().required("Required"),
+            reminder: Yup.boolean().required("Required")
+        }),
+        onSubmit: (values) => {
+            addTask(values);
         }
-
-        addTask({ text, day, reminder })
-
-        setText('')
-        setDay('')
-        setReminder(false)
-    }
+    })
 
     return (
-        <form className="add-form" onSubmit={onSubmit}>
+        <form className="add-form" onSubmit={formik.handleSubmit}>
             <div className="form-control">
                 <label>Task</label>
                 <input
+                    id="text"
                     type='text'
                     placeholder='Add task'
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
+                    value={formik.values.text}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.touched.text && formik.errors.text && <p style={{ color: 'red' }}>{formik.errors.text}</p>}
             </div>
             <div className="form-control">
                 <label>Day & time</label>
                 <input
+                    id="day"
                     type='text'
                     placeholder='Add day & time'
-                    value={day}
-                    onChange={(e) => setDay(e.target.value)}
+                    value={formik.values.day}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.touched.day && formik.errors.day && <p style={{ color: 'red' }}>{formik.errors.day}</p>}
             </div>
             <div className="form-control form-control-check">
                 <label>Reminder</label>
                 <input
+                    id="reminder"
                     type='checkbox'
-                    checked={reminder}
-                    value={reminder}
-                    onChange={(e) => setReminder(e.currentTarget.checked)}
+                    value={formik.values.reminder}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
             </div>
             <input type='submit' value='Save task' className="btn btn-block" />
