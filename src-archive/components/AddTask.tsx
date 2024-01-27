@@ -1,6 +1,8 @@
 import { useTodosContext } from "../context/TodosContext"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
+import React from "react";
+
 
 const AddTask = () => {
     const { addTask } = useTodosContext()
@@ -52,7 +54,7 @@ const AddTask = () => {
                 <input
                     id="reminder"
                     type='checkbox'
-                    value={formik.values.reminder}
+                    // value={formik.values.reminder}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
