@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import TodosContextProvider from "../src-archive/context/TodosContext";
 import RegistrationForm from "./registration-form/registration-form.component";
 import React from "react";
+import CarbonRegistrationForm from "./registration-form/registration-form-carbon.component";
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -32,6 +33,7 @@ function App() {
             {/* <Route path="/about" element={<About />} /> */}
             {/* <Route path="/learn" element={<UseMemoExample />} /> */}
             <Route path="/registration" element={<RegistrationForm />} />
+            <Route path="/carbon-registration" element={<CarbonRegistrationForm/>} />
           </Routes>
           {/* <Footer /> */}
         </div>
