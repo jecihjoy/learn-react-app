@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -9,19 +9,21 @@ const schema = z.object({
   gender: z.string(),
   dob: z.string(),
   password: z.string().min(3),
+  valdatePassword: z.string().min(3),
 });
 
 type FormProps = z.infer<typeof schema>;
 
 const RegistrationForm = () => {
   const {
+    control,
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FormProps>({
     mode: "all",
-    defaultValues: { email: "test@gmail.com", password: "test123" },
+    defaultValues: { email: "test@gmail.com", password: ""},
     resolver: zodResolver(schema),
   });
   // handleSubmit --> prevents default form behaviour and validates the values
@@ -54,6 +56,23 @@ const RegistrationForm = () => {
           {...register("password")}
           type="password"
           placeholder="Password"
+        />
+        <Controller
+          control={control}
+          rules={{
+            minLength: 3,
+          }}
+          
+          render={({ field: { onChange, onBlur, value } }) => (
+            <input
+            //  {...register("valdatePassword")}
+              placeholder="Validate Password"
+              onBlur={onBlur}
+              // onChangeText={onChange}
+              value={value}
+            />
+          )}
+          name="valdatePassword"
         />
         <br></br>
         <button disabled={isSubmitting} type="submit">
